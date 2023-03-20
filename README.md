@@ -1,4 +1,4 @@
-# MQTT Benchmark Suite Specification
+# Open MQTT Benchmark Suite Specification
 ## Introduction
 
 MQTT is a communication protocol based on Publish/Subscribe model. It has the following features:

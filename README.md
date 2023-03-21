@@ -13,7 +13,7 @@ Those characteristics make it suited for IoT applications, and become one of the
 
 In a typical MQTT Publish/Subscribe architecture, there are publishers, subscribers, and a broker in the system. A publisher sends a message to the broker on a specific topic and then the broker sends that message to all subscribers which are subscribed to the same topic.
 
-![](_assets/mqtt_model.png)
+![mqtt-model](_assets/mqtt_model.png)
 
 As a broker is the central component in an MQTT based IoT application, it plays an important role in the scalability and availability of the application.  There have been many research papers and technical writeups on the performance evaluation and comparison of various MQTT brokers. However, the existing benchmarks often measure particular factors only, with scenarios not matching the realistic large-scale IoT applications. Through development and customer support experience of the past decade, we have learnt that many factors impact MQTT broker performance.
 
@@ -147,6 +147,8 @@ A use case for this scenario is presented as:
 
 In a fan-out scenario, a large number of clients act as subscribers, with only a few or a single publisher.
 
+![fan-out](_assets/fanout.png)
+
 A use case for this scenario is presented as:
 <table>
 	<tr>
@@ -202,6 +204,8 @@ A use case for this scenario is presented as:
 
 In a point-to-point scenario, the equal number of clients act as publishers and subscribers respectively.
 
+![point-to-point](_assets/p2p.png)
+
 A use case for this scenario is presented as:
 <table>
 	<tr>
@@ -256,6 +260,8 @@ A use case for this scenario is presented as:
 ### Fan-in
 
 A fan-in scenario is the opposite of fan-out. In a fan-in scenario, a large number of clients act as publishers, with only a few or a single subscriber.
+
+![fan-in](_assets/fanin.png)
 
 A use case for this scenario is presented as:
 <table>

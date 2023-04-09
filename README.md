@@ -95,27 +95,27 @@ By analyzing realistic requirements from our customers, we categorize the benchm
 - Fan-in
 - Composite
 
+Next, we will describe each scenario and give detailed use cases for each scenario. The primary use cases will focus on those executed on single-node-brokers, and we will also add more supplemental use cases for clustering-brokers.
+
 ### Connection
 
-In a connection scenario, a batch of clients connect to the broker within a period of time, and keep the connections with the broker for quite a while. Each client subscribes to a topic once the connections established.
+In a connection scenario, a batch of clients connect to the broker within a period of time, and keep the connections with the broker for quite a while.
 
-A use case for this scenario is presented as:
+A use case of this scenario for brokers deployed on single node is presented as:
 <table>
 	<tr>
 		<td>Use case</td>
-		<td>simultaneous-conn-ssl-auth-1M-100K</td>
+		<td>singlenode-conn-tcp-1M</td>
 	</tr>
 	<tr>
 		<td>Description</td>
-		<td>1,000,000 simultaneous subscribers connect to broker using SSL/TLS</td>
+		<td>1,000,000 clients simultaneously connect to broker</td>
 	</tr>
 	<tr>
 		<td>Details</td>
 		<td>
 			<ol>
-				<li>Broker is enabled with SSL/TLS, and configured to use user/password as authentication method.</li>
-				<li>1,000,000 clients connect to the broker within 400 seconds. Each client connects to the SSL port of the broker, using MQTT 3.1.1 protocol and user/password authentication method. The Keep Alive property is set as 150, and Clean Session is set as 1.</li>
-				<li>Once a client is connected, it subscribes to a topic using QoS 0 following the rule that every 10 client subscribes to the same topic. As a result, all 1,000,000 clients subscribe to 100,000 topics.</li>
+				<li>1,000,000 clients connect to the broker within 200 seconds. Each client connects to the TCP port of the broker, using MQTT 3.1.1 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
 				<li>Keep all clients online for 30 minutes.</li>
 			</ol>
 		</td>
@@ -136,7 +136,6 @@ A use case for this scenario is presented as:
 			<ul>
 				<li>Rate of new established connections</li>
 				<li>Number of concurrent connections</li>
-				<li>Number of topics</li>
 				<li>Success rate</li>
 			</ul>
 		</td>
@@ -149,25 +148,25 @@ In a fan-out scenario, a large number of clients act as subscribers, with only a
 
 ![fan-out](_assets/fanout.png)
 
-A use case for this scenario is presented as:
+A use case of this scenario for brokers deployed on single node is presented as:
 <table>
 	<tr>
 		<td>Use case</td>
-		<td>fanout-5-500K</td>
+		<td>singlenode-fanout-5-1000-5-250K</td>
 	</tr>
 	<tr>
 		<td>Description</td>
-		<td>50 publishers publish messages to 5 topics which are subscribed by 1,000 subscribers</td>
+		<td>5 publishers publish messages to 5 topics which are subscribed by 1,000 subscribers</td>
 	</tr>
 	<tr>
 		<td>Details</td>
 		<td>
 			<ol>
-				<li>1,050 clients are divided into 5 groups. Each group has its own distinct topic, 10 publishers and 200 subscribers.</li>
+				<li>1,005 clients are divided into publishers and subscribers: 5 as publishers and 1,000 as subscribers. The publishers and subscribers will work on 5 topics.</li>
 				<li>All publishers and subscribers connect to the TCP port of the broker, using MQTT 3.1.1 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
-				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes to the topic of that group using QoS 1.</li>
-				<li>When all the connections are established, publishers of each group publish message to the topic of that group using QoS 1 with Retain as 0. The publish rate for each publisher is 50 message per second. The payload size of each message is 1 KB.</li>
-				<li>Keep the publish and subscribe for 30 minutes. The expected total publish rate is 2,500 messages per second, and the expected total subscribe rate is 500,000 messages per second.</li>
+				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes to all 5 topics using QoS 1.</li>
+				<li>When all the connections are established, each publisher publishes message to an exclusive topic using QoS 1 with Retain as 0. The publish rate for each publisher is 50 messages per second. The payload size of each message is 16 bytes.</li>
+				<li>Keep the publish and subscribe for 30 minutes. The expected total publish rate is 250 messages per second, and the expected total subscribe rate is 250,000 messages per second.</li>
 			</ol>
 		</td>
 	</tr>
@@ -210,21 +209,22 @@ A use case for this scenario is presented as:
 <table>
 	<tr>
 		<td>Use case</td>
-		<td>p2p-25K-250K</td>
+		<td>singlenode-p2p-50K-50K-50K-50K</td>
 	</tr>
 	<tr>
 		<td>Description</td>
-		<td>25,000 publishers publish messages to 25,000 topics which are subscribed by 25,000 subscribers</td>
+		<td>50,000 publishers publish messages to 50,000 topics which are subscribed by 50,000 subscribers</td>
 	</tr>
 	<tr>
 		<td>Details</td>
 		<td>
 			<ol>
-				<li>50,000 clients are divided into 25,000 groups. Each group has its own distinct topic, 1 publisher and 1 subscriber.</li>
-				<li>All publishers and subscribers connect to the TCP port of the broker, using MQTT 3.1.1 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
-				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes to the topic of that group using QoS 1.</li>
-				<li>When all the connections are established, publishers of each group publish message to the topic of that group using QoS 1 with Retain as 0. The publish rate for each publisher is 10 message per second. The payload size of each message is 1 KB.</li>
-				<li>Keep the publish and subscribe for 30 minutes. The expected total publish rate is 250,000 messages per second, and the expected total subscribe rate is 250,000 messages per second.</li>
+				<li>100,000 clients are divided into publishers and subscribers: 50,000 as publishers and 50,000 as subscribers. The publishers and subscribers will work on 50,000 topics.</li>
+
+​				<li>All publishers and subscribers connect to the TCP port of the broker, using MQTT 3.1.1 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
+				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes a topic using QoS 1. Different subscribers subscribe to different topics.</li>
+				<li>When all the connections are established, each publisher publishes messages to a topic using QoS 1 with Retain as 0. Different publishers publish to different topics. The publish rate for each publisher is 1 message per second. The payload size of each message is 16 bytes.</li>
+				<li>Keep the publish and subscribe for 30 minutes. The expected total publish rate is 50,000 messages per second, and the expected total subscribe rate is 50,000 messages per second.</li>
 			</ol>
 		</td>
 	</tr>
@@ -267,21 +267,22 @@ A use case for this scenario is presented as:
 <table>
 	<tr>
 		<td>Use case</td>
-		<td>sharesub-5000-20K</td>
+		<td>singlenode-sharesub-50K-500-50K-50K</td>
 	</tr>
 	<tr>
 		<td>Description</td>
-		<td>20,000 publishers publish messages to 2,000 topics which are subscribed by 10,000 subscribers</td>
+		<td>50,000 publishers publish messages to 50,000 topics which are subscribed in shared subscription way by 500 subscribers</td>
 	</tr>
 	<tr>
 		<td>Details</td>
 		<td>
 			<ol>
-				<li>30,000 clients are divided into 2,000 groups. Each group has its own distinct topic, 10 publishers and 5 subscribers.</li>
-				<li>All publishers and subscribers connect to the TCP port of the broker, using MQTT 3.1.1 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
-				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes to the topic of that group using QoS 1.</li>
-				<li>When all the connections are established, publishers of each group publish message to the topic of that group using QoS 0 with Retain as 0. The publish rate for each publisher is 1 message per second. The payload size of each message is 1 KB.</li>
-				<li>Keep the publish and subscribe for 30 minutes. The expected total publish rate is 20,000 messages per second, and the expected total subscribe rate is 20,000 messages per second.</li>
+				<li>50,500 clients are divided into publishers and subscribers: 50,000 as publishers and 500 as subscribers. The publishers and subscribers will work on 50,000 topics. The topics are like: test/1, test/2, ..., test/50000</li>
+
+​				<li>All publishers and subscribers connect to the TCP port of the broker which should support MQTT 5.0 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
+				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes to all the topics via shared subscription way using QoS 1. The shared subscription topic used is: $share/benchmark/test/#</li>
+				<li>When all the connections are established, each publisher publishes message to a topic using QoS 1 with Retain as 0. Different publishers publish to different topics. The publish rate for each publisher is 1 message per second. The payload size of each message is 16 bytes.</li>
+				<li>Keep the publish and subscribe for 30 minutes. The expected total publish rate is 50,000 messages per second, and the expected total subscribe rate is 50,000 messages per second.</li>
 			</ol>
 		</td>
 	</tr>
@@ -320,60 +321,16 @@ A composite scenario combines scenarios involving connection/publish/subscribe. 
 
 We welcome contributions from the community to enrich use cases!
 
-## Benchmarking results of EMQX
+## Benchmarking results
 
-To demonstrate practical examples of benchmarking result, we use EMQX as the MQTT broker and XMeter as the benchmark tool. To perform benchmarks, XMeter simulates a huge number of MQTT clients, executes 3 use cases for connection, fan-out and point-to-point scenarios, and generates a report convering the primary performance metrics.
+We execute benchmarking on several MQTT brokers (including EMQX, Mosquitto, NanoMQ, etc.), using XMeter as the benchmark tool. For each use case involved, XMeter simulates a huge number of MQTT clients, executes expected publishing/subscription, and generates reports convering the primary performance metrics.
 
-### EMQX broker configuration
+For detailed benchmarking information and result, please refer to the following pages:
 
-| **Deployment**             | **Version**             | **OS**           | **CPU** | **Memory** | **Cloud host model**        |
-| -------------------------- | ----------------------- | ---------------- | ------- | ---------- | --------------------------- |
-| 3-nodes-cluster with an LB | EMQX Open source 5.0.11 | CentOS 7.9 64bit | 32vCPUs | 64 GiB     | c6s.8xlarge.2 (Huaweicloud) |
+[Benchmark results of current connection](results/singlenode-conn-tcp-1M.md)
 
-In the benchmark, XMeter connects to the LB that is configured with EMQX via VPC peering.
+[Benchmark results of fanout](results/singlenode-fanout-5-1000-5-250K.md)
 
-### Connection case
+[Benchmark results of p2p](results/singlenode-p2p-50K-50K-50K-50K.md)
 
-Refer to “simultaneous-conn-ssl-auth-1M-100K” use case above for details.
-
-#### Result highlight
-
-|                 | **Min. connection time (ms)** | **Max. connection time  (ms)** | **Average connection time  (ms)** | **90th percentile connection time (ms)** | **Connection rate** | **EMQX node CPU usage** | **EMQX node memory usage (GiB)** |
-| --------------- | ----------------------------- | ------------------------------ | --------------------------------- | ---------------------------------------- | ------------------- | ----------------------- | -------------------------------- |
-| MQTT connection | 10                            | 2601                           | 16.1                              | 16                                       | 2,469.14 per second | max. 18%                | max. 51                          |
-
-#### Result charts
-
-![](_assets/connect-result-charts.png)
-
-### Fan-out case
-
-This composite use case combines connection and fan-out. 1,000,000 clients connect to the EMQX broker, with 1,050 of them performing fan-out scenario (refer to “fanout-5-500K” use case above) and the rest of them as background connections.
-
-#### Result highlight
-
-|                  | **Min. latency time (ms)** | **Max. latency time  (ms)** | **Average latency time  (ms)** | **90th percentile latency time (ms)** | **Message throughput** | **EMQX node CPU usage** | **EMQX node memory usage (GiB)** |
-| ---------------- | -------------------------- | --------------------------- | ------------------------------ | ------------------------------------- | ---------------------- | ----------------------- | -------------------------------- |
-| MQTT  connection | 2                          | 2012                        | 106                            | 6                                     | 2500.00 per second     | 57% - 64%               | 9.1                              |
-| MQTT publish     | 1                          | 841                         | 1.9                            | 3                                     | 2,465.58 per second    |                         |                                  |
-| MQTT subscribe   | 0                          | 1401                        | 2.8                            | 2                                     | 493,043.89 per second  |                         |                                  |
-
-#### Result charts
-
-![](_assets/fanout-result-charts.png)
-
-### Point-to-point case
-
-This composite use case combines connection and point-to-point. 1,000,000 clients connect to the EMQX broker, with 50,000 of them performing point-to-point scenario (refer to “p2p-25K-250K” use case above) and the rest of them as background connections.
-
-#### Result highlight
-
-|                 | **Min. latency time (ms)** | **Max. latency time  (ms)** | **Average latency time  (ms)** | **90th percentile latency time (ms)** | **Message throughput** | **EMQX CPU usage** | **EMQX memory usage (GiB)** |
-| --------------- | -------------------------- | --------------------------- | ------------------------------ | ------------------------------------- | ---------------------- | ------------------ | --------------------------- |
-| MQTT connection | 2                          | 1416                        | 10.9                           | 6                                     | 2500.00 per second     | 65% - 70%          | 9.7                         |
-| MQTT publish    | 0                          | 1422                        | 5.5                            | 8                                     | 246,518.27per second   |                    |                             |
-| MQTT subscribe  | 0                          | 655                         | 6.7                            | 12                                    | 246,508.62 per second  |                    |                             |
-
-#### Result charts
-
-![](_assets/p2p-result-charts.png)
+[Benchmark results of fanin](results/singlenode-sharesub-50K-500-50K-50K.md)

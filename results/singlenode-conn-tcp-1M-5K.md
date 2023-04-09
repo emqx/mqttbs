@@ -1,4 +1,4 @@
-# Benchmark results of singlenode-conn-tcp-1M
+# Benchmark results of singlenode-conn-tcp-1M-5K
 
 ## Brokers
 
@@ -8,7 +8,7 @@
 | Mosquitto             | 2.0.15      |
 | NanoMQ                | 0.17.0      |
 
-## Benchmark use case: singlenode-conn-tcp-1M
+## Benchmark use case: singlenode-conn-tcp-1M-5K
 
 In this testcase, 1,000,000 clients connect to the broker within 200 seconds (e.g. cps 5K) and all clients are kept online for 30 minutes. 
 

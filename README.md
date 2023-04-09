@@ -105,7 +105,7 @@ A use case of this scenario for brokers deployed on single node is presented as:
 <table>
 	<tr>
 		<td>Use case</td>
-		<td>singlenode-conn-tcp-1M</td>
+		<td>singlenode-conn-tcp-1M-5K</td>
 	</tr>
 	<tr>
 		<td>Description</td>
@@ -327,7 +327,7 @@ We execute benchmarking on several MQTT brokers (including EMQX, Mosquitto, Nano
 
 For detailed benchmarking information and result, please refer to the following pages:
 
-[Benchmark results of current connection](results/singlenode-conn-tcp-1M.md)
+[Benchmark results of current connection](results/singlenode-conn-tcp-1M-5K.md)
 
 [Benchmark results of fanout](results/singlenode-fanout-5-1000-5-250K.md)
 

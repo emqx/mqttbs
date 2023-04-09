@@ -323,14 +323,14 @@ We welcome contributions from the community to enrich use cases!
 
 ## Benchmarking results
 
-We execute benchmarking on several MQTT brokers (including EMQX, Mosquitto, NanoMQ, etc.), using XMeter as the benchmark tool. For each use case involved, XMeter simulates a huge number of MQTT clients, executes expected publishing/subscription, and generates reports convering the primary performance metrics.
+We execute benchmarking on several MQTT brokers (including EMQX, Mosquitto, NanoMQ, etc.), using XMeter as the benchmark tool. For each use case involved, XMeter simulates a huge number of MQTT clients, executes expected publishing/subscription, and generates reports covering the primary performance metrics.
 
 For detailed benchmarking information and result, please refer to the following pages:
 
-[Benchmark results of current connection](results/singlenode-conn-tcp-1M-5K.md)
+[Benchmarking results of concurrent connection](results/singlenode-conn-tcp-1M-5K.md)
 
-[Benchmark results of fanout](results/singlenode-fanout-5-1000-5-250K.md)
+[Benchmarking results of fan-out](results/singlenode-fanout-5-1000-5-250K.md)
 
-[Benchmark results of p2p](results/singlenode-p2p-50K-50K-50K-50K.md)
+[Benchmarking results of point-to-point](results/singlenode-p2p-50K-50K-50K-50K.md)
 
-[Benchmark results of fanin](results/singlenode-sharesub-50K-500-50K-50K.md)
+[Benchmarking results of fan-in](results/singlenode-sharesub-50K-500-50K-50K.md)

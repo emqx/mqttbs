@@ -50,5 +50,13 @@ The use case is executed on single node. XMeter (version 3.2.4) is used as the b
 | **Mosquitto** | 5.61                  | 2%                  | 2%                  | 1G              | 1G              |
 | **NanoMQ**    | 2.99                  | 5%                  | 4%                  | 10.6G           | 10.6G           |
 
-###  Appendix: result charts
+###  Appendix: result & monitoring charts
+
+- Mosquitto
+
+<img width="1279" alt="截屏2023-04-10上午9 55 53" src="https://user-images.githubusercontent.com/43202037/230810215-10852204-01fc-425b-8280-9ce24486c2f8.png">
+
+- NanoMQ
+
+<img width="1282" alt="截屏2023-04-10上午9 57 59" src="https://user-images.githubusercontent.com/43202037/230810431-3d5d4fe1-db99-4ef0-bbf3-697e02d46539.png">
 

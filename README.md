@@ -156,7 +156,7 @@ A use case of this scenario for brokers deployed on single node is presented as:
 	</tr>
 	<tr>
 		<td>Description</td>
-		<td>5 publishers publish messages to 5 topics which are subscribed by 1,000 subscribers</td>
+		<td>50 publishers publish messages to 5 topics which are subscribed by 1,000 subscribers</td>
 	</tr>
 	<tr>
 		<td>Details</td>
@@ -205,7 +205,7 @@ In a point-to-point scenario, the equal number of clients act as publishers and 
 
 ![point-to-point](_assets/p2p.png)
 
-A use case for this scenario is presented as:
+A use case of this scenario for brokers deployed on single node is presented as:
 <table>
 	<tr>
 		<td>Use case</td>
@@ -263,7 +263,7 @@ A fan-in scenario is the opposite of fan-out. In a fan-in scenario, a large numb
 
 ![fan-in](_assets/fanin.png)
 
-A use case for this scenario is presented as:
+A use case of this scenario for brokers deployed on single node is presented as:
 <table>
 	<tr>
 		<td>Use case</td>
@@ -277,7 +277,7 @@ A use case for this scenario is presented as:
 		<td>Details</td>
 		<td>
 			<ol>
-				<li>50,500 clients are divided into publishers and subscribers: 50,000 as publishers and 500 as subscribers. The publishers and subscribers will work on 50,000 topics. The topics are like: test/1, test/2, ..., test/50000</li>
+				<li>50,500 clients are divided into publishers and subscribers: 50,000 as publishers and 500 as subscribers. The publishers and subscribers will work on 50,000 topics. The topics are like: test/1, test/2, ..., test/50000.</li>
 
 ​				<li>All publishers and subscribers connect to the TCP port of the broker which should support MQTT 5.0 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
 				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes to all the topics via shared subscription way using QoS 1. The shared subscription topic used is: $share/benchmark/test/#</li>

@@ -4,7 +4,8 @@
 
 | Opensource **Broker** | **Version** |
 | --------------------- | ----------- |
-| EMQX                  | 5.0.21      |
+| EMQX 4                | 4.4.16      |
+| EMQX 5                | 5.0.21      |
 | Mosquitto             | 2.0.15      |
 | NanoMQ                | 0.17.0      |
 
@@ -54,12 +55,29 @@ The use case is executed on single node. XMeter (version 3.2.4) is used as the b
 
 |               | Actual msg rate  | Average pub-to-sub latency (ms) | Max CPU user+system | Avg CPU user+system | Max memory used | Avg memory used |
 | ------------- | ---------------- | ------------------------------- | ------------------- | ------------------- | --------------- | --------------- |
+| **EMQX 4**    | pub: 50ksub: 50k | 1.58                            | 94%                 | 93%                 | 8.27G           | 6.78G           |
+| **EMQX 5**    | pub: 50ksub: 50k | 2.51                            | 94%                 | 93%                 | 6.6G            | 5.9G            |
 | **Mosquitto** | pub: 50ksub: 40k | 12,476.34                       | 7%                  | 7%                  | 488M            | 466M            |
 | **NanoMQ**    | pub: 50ksub: 50k | 2.76                            | 34%                 | 34%                 | 795M            | 783M            |
 
-> in this scenario, the consumption rate of Mosquitto cannot reach to the designed rate. It stabilized at 41,000/s.
+> in this scenario, the consumption rate of Mosquitto couldn't reach to the designed rate. It stabilized at 41,000/s.
 >
-> NanoMQ kept the stable pub & sub rate at 50,000/s during the test.
+> EMQX 4, EMQX 5 and NanoMQ kept the stable pub & sub rate at 50,000/s during the test.
 
 ###  Appendix: result charts
 
+#### EMQX 4
+
+![EMQX 4](../_assets/emqx-4.4.16-fanin-result-charts.png)
+
+#### EMQX 5
+
+![EMQX 5](../_assets/emqx-5.0.21-fanin-result-charts.png)
+
+#### Mosquitto
+
+![Mosquitto](../_assets/mosquitto-2.0.15-fanin-result-charts.png)
+
+#### NanoMQ
+
+![NanoMQ](../_assets/nano-0.17.0-fanin-result-charts.png)

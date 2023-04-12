@@ -4,7 +4,8 @@
 
 | Opensource **Broker** | **Version** |
 | --------------------- | ----------- |
-| EMQX                  | 5.0.21      |
+| EMQX 4                | 4.4.16      |
+| EMQX 5                | 5.0.21      |
 | Mosquitto             | 2.0.15      |
 | NanoMQ                | 0.17.0      |
 
@@ -47,6 +48,8 @@ The use case is executed on single node. XMeter (version 3.2.4) is used as the b
 
 |               | Average  latency (ms) | Max CPU user+system | Avg CPU user+system | Max memory used | Avg memory used |
 | ------------- | --------------------- | ------------------- | ------------------- | --------------- | --------------- |
+| **EMQX 4**    | 2.21                  | 44%                 | 31%                 | 10.87G          | 8.68G           |
+| **EMQX 5**    | 2.25                  | 52%                 | 24%                 | 16.1G           | 12.1G           |
 | **Mosquitto** | 5.61                  | 2%                  | 2%                  | 1G              | 1G              |
 | **NanoMQ**    | 2.99                  | 5%                  | 4%                  | 10.6G           | 10.6G           |
 
@@ -60,3 +63,16 @@ The use case is executed on single node. XMeter (version 3.2.4) is used as the b
 
 <img width="1282" alt="截屏2023-04-10上午9 57 59" src="https://user-images.githubusercontent.com/43202037/230810431-3d5d4fe1-db99-4ef0-bbf3-697e02d46539.png">
 
+#### EMQX 4
+
+
+
+#### EMQX 5
+
+
+
+#### Mosquitto
+
+
+
+#### NanoMQ

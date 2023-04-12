@@ -4,7 +4,8 @@
 
 | Opensource **Broker** | **Version** |
 | --------------------- | ----------- |
-| EMQX                  | 5.0.21      |
+| EMQX 4                | 4.4.16      |
+| EMQX 5                | 5.0.21      |
 | Mosquitto             | 2.0.15      |
 | NanoMQ                | 0.17.0      |
 
@@ -54,12 +55,30 @@ The use case is executed on single node. XMeter (version 3.2.4) is used as the b
 
 |               | Actual msg rate | Average pub-to-sub latency (ms) | Max CPU user+system | Avg CPU user+system | Max memory used | Avg memory used |
 | ------------- | --------------- | ------------------------------- | ------------------- | ------------------- | --------------- | --------------- |
+| **EMQX 4**    | 50k:50k         | 1.68                            | 88%                 | 80%                 | 6.19G           | 5.22G           |
+| **EMQX 5**    | 50k:50k         | 2.17                            | 89%                 | 82%                 | 6.7G            | 5.9G            |
 | **Mosquitto** | 37k:37k         | 335.94                          | 7%                  | 6%                  | 354M            | 328M            |
 | **NanoMQ**    | 50k:50k         | 64.48                           | 34%                 | 31%                 | 1.3G            | 1.3G            |
 
-> in this scenario, Mosquitto cannot reach to the designed message rate. It stabilized at 37300/s for both pub and sub. 
+> in this scenario, Mosquitto couldn't reach to the designed message rate. It stabilized at 37300/s for both pub and sub. 
 >
-> NanoMQ kept the stable pub & sub rate at 50000/s during the test.
+> EMQX 4, EMQX 5 and NanoMQ kept the stable pub & sub rate at 50000/s during the test.
 
 ###  Appendix: result charts
+
+#### EMQX 4
+
+![EMQX 4](../_assets/emqx-4.4.16-p2p-result-charts.png)
+
+#### EMQX 5
+
+![EMQX 5](../_assets/emqx-5.0.21-p2p-result-charts.png)
+
+#### Mosquitto
+
+![Mosquitto](../_assets/mosquitto-2.0.15-p2p-result-charts.png)
+
+#### NanoMQ
+
+![NanoMQ](../_assets/nano-0.17.0-p2p-result-charts.png)
 

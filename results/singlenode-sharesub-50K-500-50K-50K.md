@@ -76,7 +76,7 @@ The use case is executed on single node. XMeter (version 3.2.4) is used as the b
 
 #### Mosquitto
 
-![Mosquitto](../_assets/mosquitto-2.0.15-fanin-result-charts.png)
+
 
 #### NanoMQ
 

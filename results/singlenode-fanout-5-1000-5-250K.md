@@ -4,7 +4,8 @@
 
 | Opensource **Broker** | **Version** |
 | --------------------- | ----------- |
-| EMQX                  | 5.0.21      |
+| EMQX 4                | 4.4.16      |
+| EMQX 5                | 5.0.21      |
 | Mosquitto             | 2.0.15      |
 | NanoMQ                | 0.17.0      |
 
@@ -54,12 +55,29 @@ The use case is executed on single node. XMeter (version 3.2.4) is used as the b
 
 |               | Actual msg rate | Average pub-to-sub latency (ms) | Max CPU user+system | Avg CPU user+system | Max memory used | Avg memory used |
 | ------------- | --------------- | ------------------------------- | ------------------- | ------------------- | --------------- | --------------- |
+| **EMQX 4**    | 250k            | 1.98                            | 83%                 | 79%                 | 517M            | 486M            |
+| **EMQX 5**    | 250k            | 2.27                            | 81%                 | 79%                 | 540M            | 494M            |
 | **Mosquitto** | 81k             | 12,445                          | 7%                  | 6%                  | 366M            | 351M            |
 | **NanoMQ**    | 250k            | 14.07                           | 72%                 | 70%                 | 824M            | 685M            |
 
-> in this scenario, Mosquitto cannot reach to the designed message rate. The throughput has been fluctuating around 80,000/s.
+> in this scenario, Mosquitto couldn't reach to the designed message rate. The throughput has been fluctuating around 80,000/s.
 >
-> NanoMQ kept the stable rate at 250,000/s during the test.
+> EMQX 4, EMQX 5 and NanoMQ kept the stable rate at 250,000/s during the test.
 
 ###  Appendix: result charts
 
+#### EMQX 4
+
+![EMQX 4](../_assets/emqx-4.4.16-fanout-result-charts.png)
+
+#### EMQX 5
+
+![EMQX 5](../_assets/emqx-5.0.21-fanout-result-charts.png)
+
+#### Mosquitto
+
+![Mosquitto](../_assets/mosquitto-2.0.15-fanout-result-charts.png)
+
+#### NanoMQ
+
+![NanoMQ](../_assets/nano-0.17.0-fanout-result-charts.png)

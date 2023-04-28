@@ -95,7 +95,7 @@ By analyzing realistic requirements from our customers, we categorize the benchm
 - Fan-in
 - Composite
 
-Next, we will describe each scenario and give detailed use cases for each scenario.  To meet different user needs, different use cases are demanded. For example, some of them can be used for basic verification purpose, while some of them aim for enterprise level verification. Therefore, we group use cases of the same scalability level into one set, to help user pick up the use cases they need more easily. The use cases in each set will be introduced in details immediately after.
+Next, we will describe each scenario and give detailed use cases for each scenario. To meet different user needs, different use cases are demanded. For example, some of them can be used for basic verification purpose, while some of them aim for enterprise level verification. Therefore, we group use cases of the same scalability level into one set, to help user pick up the use cases they need more easily. The use cases in each set will be introduced in details immediately after.
 
 ### Basic set
 

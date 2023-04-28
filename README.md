@@ -189,7 +189,7 @@ In a fan-out scenario, a large number of clients act as subscribers, with only a
 
 ![fan-out](_assets/fanout.png)
 
-A use case of this scenario for brokers deployed on single node is presented as:
+2 use cases of this scenario for brokers deployed on single node are presented as:
 
 <table>
 	<tr>
@@ -297,7 +297,7 @@ In a point-to-point scenario, the equal number of clients act as publishers and 
 
 ![point-to-point](_assets/p2p.png)
 
-2 use case of this scenario for brokers deployed on single node are presented as:
+2 use cases of this scenario for brokers deployed on single node are presented as:
 
 <table>
 	<tr>
@@ -407,7 +407,7 @@ A fan-in scenario is the opposite of fan-out. In a fan-in scenario, a large numb
 
 ![fan-in](_assets/fanin.png)
 
-A use case of this scenario for brokers deployed on single node is presented as:
+2 use cases of this scenario for brokers deployed on single node are presented as:
 <table>
 	<tr>
 		<td>Use case</td>

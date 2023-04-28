@@ -101,23 +101,23 @@ Next, we will describe each scenario and give detailed use cases for each scenar
 
 This set is for small-scale. It consists of the following use cases:
 
-| Use case                         | Description                                                  |
-| -------------------------------- | ------------------------------------------------------------ |
-| singlenode-conn-tcp-10K-100      | Connection scenario for 1,000 clients                        |
-| singlenode-fanout-1-1000-1-1000K | Fan-out scenario for 1 pub message per second and 1,000 sub messages per second |
-| singlenode-p2p-1K-1K-1K-1K       | Point-to-point scenario for 1,000 pub messages per second and 1,000 sub messages per second |
-| singlenode-sharesub-1K-5-1K-1K   | Fan-in scenario for 1,000 pub messages per second and 1,000 sub messages per second in shared subscription way |
+| Use case                        | Description                                                  |
+| ------------------------------- | ------------------------------------------------------------ |
+| singlenode-conn-tcp-10K-100     | Connection scenario for 1,000 clients                        |
+| singlenode-fanout-1-1K-1-1K     | Fan-out scenario for 1 pub message per second and 1,000 sub messages per second |
+| singlenode-p2p-1K-1K-1K-1K      | Point-to-point scenario for 1,000 pub messages per second and 1,000 sub messages per second |
+| singlenode-sharedsub-1K-5-1K-1K | Fan-in scenario for 1,000 pub messages per second and 1,000 sub messages per second in shared subscription way |
 
 ### Enterprise set
 
 This set is for large-scale. It consists of the following use cases:
 
-| Use case                            | Description                                                  |
-| ----------------------------------- | ------------------------------------------------------------ |
-| singlenode-conn-tcp-1M-5K           | Connection scenario for 1,000,000 clients                    |
-| singlenode-fanout-5-1000-5-250K     | Fan-out scenario for 5 pub messages per second and 250,000 sub messages per second |
-| singlenode-p2p-50K-50K-50K-50K      | Point-to-point scenario for 50,000 pub messages per second and 50,000 sub messages per second |
-| singlenode-sharesub-50K-500-50K-50K | Fan-in scenario for 50,000 pub messages per second and 50,000 sub messages per second in shared subscription way |
+| Use case                             | Description                                                  |
+| ------------------------------------ | ------------------------------------------------------------ |
+| singlenode-conn-tcp-1M-5K            | Connection scenario for 1,000,000 clients                    |
+| singlenode-fanout-5-1000-5-250K      | Fan-out scenario for 5 pub messages per second and 250,000 sub messages per second |
+| singlenode-p2p-50K-50K-50K-50K       | Point-to-point scenario for 50,000 pub messages per second and 50,000 sub messages per second |
+| singlenode-sharedsub-50K-500-50K-50K | Fan-in scenario for 50,000 pub messages per second and 50,000 sub messages per second in shared subscription way |
 
 Here comes the detailed use cases. The primary use cases focus on those executed on single-node-brokers, and in the future, we will add more supplemental use cases for clustering-brokers.
 
@@ -218,7 +218,7 @@ In a fan-out scenario, a large number of clients act as subscribers, with only a
 <table>
 	<tr>
 		<td>Use case</td>
-		<td>singlenode-fanout-1-1000-1-1000K</td>
+		<td>singlenode-fanout-1-1K-1-1K</td>
 	</tr>
 	<tr>
 		<td>Description</td>
@@ -436,7 +436,7 @@ A fan-in scenario is the opposite of fan-out. In a fan-in scenario, a large numb
 <table>
 	<tr>
 		<td>Use case</td>
-		<td>singlenode-sharesub-1K-5-1K-1K</td>
+		<td>singlenode-sharedsub-1K-5-1K-1K</td>
 	</tr>
 	<tr>
 		<td>Description</td>
@@ -487,7 +487,7 @@ A fan-in scenario is the opposite of fan-out. In a fan-in scenario, a large numb
 <table>
 	<tr>
 		<td>Use case</td>
-		<td>singlenode-sharesub-50K-500-50K-50K</td>
+		<td>singlenode-sharedsub-50K-500-50K-50K</td>
 	</tr>
 	<tr>
 		<td>Description</td>

@@ -101,7 +101,48 @@ Next, we will describe each scenario and give detailed use cases for each scenar
 
 In a connection scenario, a batch of clients connect to the broker within a period of time, and keep the connections with the broker for quite a while.
 
-A use case of this scenario for brokers deployed on single node is presented as:
+2 use cases of this scenario for brokers deployed on single node are presented as:
+
+<table>
+	<tr>
+		<td>Use case</td>
+		<td>singlenode-conn-tcp-10K-100</td>
+	</tr>
+	<tr>
+		<td>Description</td>
+		<td>10,000 clients simultaneously connect to broker</td>
+	</tr>
+	<tr>
+		<td>Details</td>
+		<td>
+			<ol>
+				<li>10,000 clients connect to the broker within 100 seconds. Each client connects to the TCP port of the broker, using MQTT 3.1.1 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
+				<li>Keep all clients online for 30 minutes.</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>Computing resource metrics of interest</td>
+		<td>
+			<ul>
+				<li>CPU load and usage</li>
+				<li>Memory usage</li>
+				<li>Disk I/O rate</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>Broker capability metrics of interest</td>
+		<td>
+			<ul>
+				<li>Rate of new established connections</li>
+				<li>Number of concurrent connections</li>
+				<li>Success rate</li>
+			</ul>
+		</td>
+	</tr>
+</table>
+
 <table>
 	<tr>
 		<td>Use case</td>
@@ -149,6 +190,57 @@ In a fan-out scenario, a large number of clients act as subscribers, with only a
 ![fan-out](_assets/fanout.png)
 
 A use case of this scenario for brokers deployed on single node is presented as:
+
+<table>
+	<tr>
+		<td>Use case</td>
+		<td>singlenode-fanout-1-1000-1-1000K</td>
+	</tr>
+	<tr>
+		<td>Description</td>
+		<td>1 publisher publishes messages to 1 topic which are subscribed by 1,000 subscribers</td>
+	</tr>
+	<tr>
+		<td>Details</td>
+		<td>
+			<ol>
+				<li>1,001 clients are divided into publishers and subscribers: 1 as publisher and 1,000 as subscribers. The publishers and subscribers will work on 1 topic.</li>
+				<li>All publishers and subscribers connect to the TCP port of the broker, using MQTT 3.1.1 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
+				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes to the topics using QoS 1.</li>
+				<li>When all the connections are established, the publisher publishes message to the topic using QoS 1 with Retain as 0. The publish rate for each publisher is 1 message per second. The payload size of each message is 16 bytes.</li>
+				<li>Keep the publish and subscribe for 30 minutes. The expected total publish rate is 1 message per second, and the expected total subscribe rate is 1,000 messages per second.</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>Computing resource metrics of interest</td>
+		<td>
+			<ul>
+				<li>CPU load and usage</li>
+				<li>Memory usage</li>
+				<li>Disk I/O rate</li>
+				<li>Packets receiving and sending rate</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>Broker capability metrics of interest</td>
+		<td>
+			<ul>
+				<li>Number of publishers</li>
+				<li>Number of subscribers</li>
+				<li>Number of topics</li>
+				<li>Size of messages</li>
+				<li>Rate of messages published</li>
+				<li>Rate of messages subscribed</li>
+				<li>Success rate</li>
+				<li>Average latency time</li>
+				<li>90th percentile latency time</li>
+			</ul>
+		</td>
+	</tr>
+</table>
+
 <table>
 	<tr>
 		<td>Use case</td>
@@ -205,7 +297,59 @@ In a point-to-point scenario, the equal number of clients act as publishers and 
 
 ![point-to-point](_assets/p2p.png)
 
-A use case of this scenario for brokers deployed on single node is presented as:
+2 use case of this scenario for brokers deployed on single node are presented as:
+
+<table>
+	<tr>
+		<td>Use case</td>
+		<td>singlenode-p2p-1K-1K-1K-1K</td>
+	</tr>
+	<tr>
+		<td>Description</td>
+		<td>1,000 publishers publish messages to 1,000 topics which are subscribed by 1,000 subscribers</td>
+	</tr>
+	<tr>
+		<td>Details</td>
+		<td>
+			<ol>
+				<li>2,000 clients are divided into publishers and subscribers: 1,000 as publishers and 1,000 as subscribers. The publishers and subscribers will work on 1,000 topics.</li>
+
+​				<li>All publishers and subscribers connect to the TCP port of the broker, using MQTT 3.1.1 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
+				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes a topic using QoS 1. Different subscribers subscribe to different topics.</li>
+				<li>When all the connections are established, each publisher publishes messages to a topic using QoS 1 with Retain as 0. Different publishers publish to different topics. The publish rate for each publisher is 1 message per second. The payload size of each message is 16 bytes.</li>
+				<li>Keep the publish and subscribe for 30 minutes. The expected total publish rate is 1,000 messages per second, and the expected total subscribe rate is 1,000 messages per second.</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>Computing resource metrics of interest</td>
+		<td>
+			<ul>
+				<li>CPU load and usage</li>
+				<li>Memory usage</li>
+				<li>Disk I/O rate</li>
+				<li>Packets receiving and sending rate</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>Broker capability metrics of interest</td>
+		<td>
+			<ul>
+				<li>Number of publishers</li>
+				<li>Number of subscribers</li>
+				<li>Number of topics</li>
+				<li>Size of messages</li>
+				<li>Rate of messages published</li>
+				<li>Rate of messages subscribed</li>
+				<li>Success rate</li>
+				<li>Average latency time</li>
+				<li>90th percentile latency time</li>
+			</ul>
+		</td>
+	</tr>
+</table>
+
 <table>
 	<tr>
 		<td>Use case</td>
@@ -315,11 +459,88 @@ A use case of this scenario for brokers deployed on single node is presented as:
 	</tr>
 </table>
 
+<table>
+	<tr>
+		<td>Use case</td>
+		<td>singlenode-sharesub-1K-5-1K-1K</td>
+	</tr>
+	<tr>
+		<td>Description</td>
+		<td>1,000 publishers publish messages to 1,000 topics which are subscribed in shared subscription way by 5 subscribers</td>
+	</tr>
+	<tr>
+		<td>Details</td>
+		<td>
+			<ol>
+				<li>1,005 clients are divided into publishers and subscribers: 1,000 as publishers and 5 as subscribers. The publishers and subscribers will work on 1,000 topics. The topics are like: test/1, test/2, ..., test/1000.</li>
+
+​				<li>All publishers and subscribers connect to the TCP port of the broker which should support MQTT 5.0 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
+				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes to all the topics via shared subscription way using QoS 1. The shared subscription topic used is: $share/benchmark/test/#</li>
+				<li>When all the connections are established, each publisher publishes message to a topic using QoS 1 with Retain as 0. Different publishers publish to different topics. The publish rate for each publisher is 1 message per second. The payload size of each message is 16 bytes.</li>
+				<li>Keep the publish and subscribe for 30 minutes. The expected total publish rate is 1,000 messages per second, and the expected total subscribe rate is 1,000 messages per second.</li>
+			</ol>
+		</td>
+	</tr>
+	<tr>
+		<td>Computing resource metrics of interest</td>
+		<td>
+			<ul>
+				<li>CPU load and usage</li>
+				<li>Memory usage</li>
+				<li>Disk I/O rate</li>
+				<li>Packets receiving and sending rate</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td>Broker capability metrics of interest</td>
+		<td>
+			<ul>
+				<li>Number of publishers</li>
+				<li>Number of subscribers</li>
+				<li>Number of topics</li>
+				<li>Size of messages</li>
+				<li>Rate of messages published</li>
+				<li>Rate of messages subscribed</li>
+				<li>Success rate</li>
+				<li>Average latency time</li>
+				<li>90th percentile latency time</li>
+			</ul>
+		</td>
+	</tr>
+</table>
+
 ### Composite
 
 A composite scenario combines scenarios involving connection/publish/subscribe. Usually, a large number of clients connect to the broker, with most of them playing roles of background connections, and the rest of them perform fan-out, point-to-point, or fan-in scenario.
 
 We welcome contributions from the community to enrich use cases!
+
+## Benchmark sets
+
+The various use cases above are for different user needs. For example, some of them can be used for basic verification purpose, while some of them aim for enterprise level verification. Therefore, we group use cases of the save scalability level into one set, to help user pick up the use cases they need more easily.
+
+### Basic set
+
+This set is for small-scale. It consists of the following use cases:
+
+| Use case                         | Description                                                  |
+| -------------------------------- | ------------------------------------------------------------ |
+| singlenode-conn-tcp-10K-100      | Connection scenario for 1,000 clients                        |
+| singlenode-fanout-1-1000-1-1000K | Fan-out scenario for 1 pub message per second and 1,000 sub messages per second |
+| singlenode-p2p-1K-1K-1K-1K       | Point-to-point scenario for 1,000 pub messages per second and 1,000 sub messages per second |
+| singlenode-sharesub-1K-5-1K-1K   | Fan-in scenario for 1,000 pub messages per second and 1,000 sub messages per second in shared subscription way |
+
+### Enterprise set
+
+This set is for large-scale. It consists of the following use cases:
+
+| Use case                            | Description                                                  |
+| ----------------------------------- | ------------------------------------------------------------ |
+| singlenode-conn-tcp-1M-5K           | Connection scenario for 1,000,000 clients                    |
+| singlenode-fanout-5-1000-5-250K     | Fan-out scenario for 5 pub messages per second and 250,000 sub messages per second |
+| singlenode-p2p-50K-50K-50K-50K      | Point-to-point scenario for 50,000 pub messages per second and 50,000 sub messages per second |
+| singlenode-sharesub-50K-500-50K-50K | Fan-in scenario for 50,000 pub messages per second and 50,000 sub messages per second in shared subscription way |
 
 ## Benchmarking results
 

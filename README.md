@@ -422,7 +422,7 @@ A fan-in scenario is the opposite of fan-out. In a fan-in scenario, a large numb
 		<td>Details</td>
 		<td>
 			<ol>
-				<li>1,005 clients are divided into publishers and subscribers: 1,000 as  publishers and 5 as subscribers. The publishers and subscribers will  work on 1,000 topics. The topics are like: test/1, test/2, ...,  test/1000.</li>
+				<li>1,005 clients are divided into publishers and subscribers: 1,000 as publishers and 5 as subscribers. The publishers and subscribers will work on 1,000 topics. The topics are like: test/1, test/2, ..., test/1000.</li>
 
 ​				<li>All publishers and subscribers connect to the TCP port of the broker which should support MQTT 5.0 protocol. The Keep Alive property is set as 300, and Clean Session is set as 1.</li>
 				<li>Once the connection of a subscriber is established, the subscriber immediately subscribes to all the topics via shared subscription way using QoS 1. The shared subscription topic used is: $share/benchmark/test/#</li>
